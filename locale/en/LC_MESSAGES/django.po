@@ -1,0 +1,219 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-11 14:29+0700\n"
+"PO-Revision-Date: 2025-03-11 14:34+0000\n"
+"Last-Translator:   <>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.10.1\n"
+
+#: .\app_article\models.py:18 .\app_article\models.py:84
+msgid "Tên"
+msgstr "Name"
+
+#: .\app_article\models.py:19
+msgid "Tóm tắt"
+msgstr "Abstract"
+
+#: .\app_article\models.py:20
+msgid "Nội dung"
+msgstr "Content"
+
+#: .\app_article\models.py:22 .\app_article\models.py:57
+#: .\app_article\models.py:72 .\app_article\models.py:87
+msgid "Ảnh thu nhỏ"
+msgstr "Thumbnail"
+
+#: .\app_article\models.py:23
+msgid "Lượt xem"
+msgstr "View"
+
+#: .\app_article\models.py:24
+msgid "Lượt thích"
+msgstr "Like"
+
+#: .\app_article\models.py:25
+msgid "Phê duyệt"
+msgstr "Approve"
+
+#: .\app_article\models.py:30 .\app_article\models.py:31
+msgid "Bài viết"
+msgstr "Article"
+
+#: .\app_article\models.py:43 .\app_article\models.py:64
+#: .\app_article\models.py:65
+msgid "Hình ảnh"
+msgstr "Image"
+
+#: .\app_article\models.py:47 .\app_article\models.py:78
+#: .\app_article\models.py:79
+#, fuzzy
+#| msgid "Tệp tài liệu"
+msgid "Tài liệu"
+msgstr "Document"
+
+#: .\app_article\models.py:51
+msgid "Đường dẫn ngoài"
+msgstr "Link"
+
+#: .\app_article\models.py:58
+msgid "Ảnh đầy đủ"
+msgstr "Large Image"
+
+#: .\app_article\models.py:70
+msgid "Tệp tài liệu"
+msgstr "Document file"
+
+#: .\app_article\models.py:85
+msgid "Liên kết"
+msgstr "Link"
+
+#: .\app_article\models.py:93 .\app_article\models.py:94
+msgid "Liên kết ngoài"
+msgstr "Link"
+
+#: .\app_gateway\admin.py:13
+msgid "Đối tượng"
+msgstr "Object"
+
+#: .\backend\custom\models.py:34
+msgid "Thứ tự hiển thị"
+msgstr "Order"
+
+#: .\backend\custom\models.py:37
+msgid "Ngày khởi tạo"
+msgstr "Created at"
+
+#: .\backend\custom\models.py:44
+#, fuzzy
+#| msgid "Ngày khởi tạo"
+msgid "Người khởi tạo"
+msgstr "Created at"
+
+#: .\backend\custom\models.py:48
+msgid "Ngày cập nhật"
+msgstr "Updated at"
+
+#: .\backend\custom\models.py:55
+#, fuzzy
+#| msgid "Ngày cập nhật"
+msgid "Người cập nhật"
+msgstr "Updated at"
+
+#: .\backend\custom\models.py:57
+msgid "Xóa"
+msgstr "Is deleted"
+
+#: .\backend\custom\models.py:62
+msgid "Ngày xóa"
+msgstr "Deleted at"
+
+#: .\backend\custom\models.py:70
+msgid "Deleted By"
+msgstr "Deleted by"
+
+#: .\backend\custom\models.py:72
+msgid "Hoạt động"
+msgstr "Actived"
+
+#: .\backend\custom\models.py:73
+msgid "Slug"
+msgstr ""
+
+#: .\backend\settings.py:180
+msgid "Django core Admin"
+msgstr ""
+
+#: .\backend\settings.py:183 .\backend\settings.py:186
+msgid "Django core"
+msgstr ""
+
+#: .\backend\settings.py:224
+msgid "Trang chủ"
+msgstr "Home"
+
+#: .\backend\settings.py:389
+msgid "Tiếng Việt"
+msgstr "Vietnamese"
+
+#: .\backend\settings.py:390
+msgid "English"
+msgstr ""
+
+#: .\templates\admin\change_form.html:23
+msgid "Home"
+msgstr ""
+
+#: .\templates\admin\change_form.html:34
+#, python-format
+msgid "Add %(name)s"
+msgstr ""
+
+#: .\templates\admin\change_form.html:55
+msgid "Please correct the error below."
+msgstr ""
+
+#: .\templates\admin\change_form.html:57
+msgid "Please correct the errors below."
+msgstr ""
+
+#: .\templates\admin\edit_inline\stacked.html:32
+#: .\templates\admin\edit_inline\tabular.html:124
+msgid "New"
+msgstr ""
+
+#: .\templates\admin\edit_inline\stacked.html:36
+#: .\templates\admin\edit_inline\tabular.html:45
+#: .\templates\admin\edit_inline\tabular.html:128
+msgid "View on site"
+msgstr ""
+
+#: .\templates\admin\edit_inline\tabular.html:19
+msgid "Delete?"
+msgstr ""
+
+#~ msgid "Thông tin chung"
+#~ msgstr "General"
+
+#~ msgid "Thư viện"
+#~ msgstr "Album"
+
+#~ msgid "Mô tả"
+#~ msgstr "Description"
+
+#~ msgid "Phim"
+#~ msgstr "Video"
+
+#, fuzzy
+#~ msgid "Âm thanh"
+#~ msgstr "Audio"
+
+#~ msgid "Thư viện hình ảnh"
+#~ msgstr "Album image"
+
+#~ msgid "Tệp phim"
+#~ msgstr "Video file"
+
+#~ msgid "Thư viện phim"
+#~ msgstr "Album video"
+
+#~ msgid "Tệp âm thanh"
+#~ msgstr "Audio file"
+
+#~ msgid "Thư viện âm thanh"
+#~ msgstr "Album audio"
+
+#~ msgid "Thư viện tài liệu"
+#~ msgstr "Album document"
