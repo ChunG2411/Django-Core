@@ -51,7 +51,7 @@ class DocumentSerializer(BaseTranslatableSerializer):
             'translations',
             'thumbnail',
             'article'
-        ] + BaseSerializer.base_fields
+        ] + BaseTranslatableSerializer.base_fields
     
 
 class DocumentOverviewSerializer(BaseTranslatableSerializer):
@@ -64,7 +64,7 @@ class DocumentOverviewSerializer(BaseTranslatableSerializer):
             'translations',
             'thumbnail',
             'article'
-        ] + BaseSerializer.base_overview_fields
+        ] + BaseTranslatableSerializer.base_overview_fields
 
 
 # Link
@@ -79,7 +79,7 @@ class LinkSerializer(BaseTranslatableSerializer):
             'translations',
             'thumbnail',
             'article'
-        ] + BaseSerializer.base_fields
+        ] + BaseTranslatableSerializer.base_fields
 
 
 class LinkOverviewSerializer(BaseTranslatableSerializer):
@@ -92,16 +92,16 @@ class LinkOverviewSerializer(BaseTranslatableSerializer):
             'translations',
             'thumbnail',
             'article'
-        ] + BaseSerializer.base_overview_fields
+        ] + BaseTranslatableSerializer.base_overview_fields
 
 
 # Article
 
 class ArticleSerializer(BaseTranslatableSerializer):
     translations = TranslatedFieldsField(shared_model=Article)
-    image_article = ImageSerializer(many=True)
-    document_article = DocumentSerializer(many=True)
-    link_article = LinkSerializer(many=True)
+    image_article = ImageOverviewSerializer(many=True)
+    document_article = DocumentOverviewSerializer(many=True)
+    link_article = LinkOverviewSerializer(many=True)
 
     class Meta:
         model = Article
@@ -115,7 +115,12 @@ class ArticleSerializer(BaseTranslatableSerializer):
             'image_article',
             'document_article',
             'link_article'
-        ] + BaseSerializer.base_fields
+        ] + BaseTranslatableSerializer.base_fields
+        extra_kwargs = {
+            'image_article': {'read_only': 'true'},
+            'document_article': {'read_only': 'true'},
+            'link_article': {'read_only': 'true'}
+        }
 
 
 class ArticleOverviewSerializer(BaseTranslatableSerializer):
@@ -130,5 +135,5 @@ class ArticleOverviewSerializer(BaseTranslatableSerializer):
             'view',
             'like',
             'approve'
-        ] + BaseSerializer.base_overview_fields
+        ] + BaseTranslatableSerializer.base_overview_fields
     

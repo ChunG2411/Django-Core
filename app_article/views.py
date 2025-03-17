@@ -31,14 +31,14 @@ class ArticleView(ModelViewSet,
                   HandleHideShowObject,
                   PreloadObject):
     
-    queryset = Article.objects.all()
+    queryset = Article.objects_active.all()
     serializer_class = ArticleSerializer
     permission_classes = [CustomModelPermissions]
     pagination_class = CustomPagination
     preload = Article_preload
 
     def get_queryset(self): 
-        new_queryset = Article.objects.all()
+        new_queryset = Article.objects_active.all()
         
         name = self.request.query_params.get('name')
         approve = self.request.query_params.get('approve')
@@ -46,11 +46,11 @@ class ArticleView(ModelViewSet,
         if name:
             new_queryset = new_queryset.filter(translations__name__icontains=name.lower()).distinct()
         if approve == '1':
-            new_queryset = Article.objects.filter(approve=True)
+            new_queryset = Article.objects_active.filter(approve=True)
         elif approve == '0':
-            new_queryset = Article.objects.filter(approve=False)
+            new_queryset = Article.objects_active.filter(approve=False)
         elif approve == 'all':
-            new_queryset = Article.objects.all()
+            new_queryset = Article.objects_active.all()
 
         return new_queryset
 
@@ -65,6 +65,16 @@ class ArticleView(ModelViewSet,
             return [SpecialModelPermissions(perm='can_approve_article')]
         else:
             return [CustomModelPermissions()]
+        
+    def create(self, request, *args, **kwargs):
+        data = request.data.copy()
+
+        data['view'] = 1000
+
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return Response(serializer.data, status=201)
     
     @action(methods=['get'], detail=True, url_path='approve')
     def handle_approve(self, request, pk):

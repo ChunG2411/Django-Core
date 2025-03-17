@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-11 14:29+0700\n"
+"POT-Creation-Date: 2025-03-17 09:42+0700\n"
 "PO-Revision-Date: 2025-03-11 14:33+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,71 +19,101 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Translated-Using: django-rosetta 0.10.1\n"
 
-#: .\app_article\models.py:18 .\app_article\models.py:84
+#: .\app_account\apps.py:8
+msgid "Người dùng"
+msgstr ""
+
+#: .\app_account\models.py:21 .\app_article\models.py:19
+#: .\app_article\models.py:85
 msgid "Tên"
 msgstr ""
 
-#: .\app_article\models.py:19
-msgid "Tóm tắt"
+#: .\app_account\models.py:22
+msgid "Mô tả"
 msgstr ""
 
-#: .\app_article\models.py:20
-msgid "Nội dung"
+#: .\app_account\models.py:24
+msgid "Hạn sử dụng"
 msgstr ""
 
-#: .\app_article\models.py:22 .\app_article\models.py:57
-#: .\app_article\models.py:72 .\app_article\models.py:87
-msgid "Ảnh thu nhỏ"
+#: .\app_account\models.py:25
+msgid "Quyền truy cập"
 msgstr ""
 
-#: .\app_article\models.py:23
-msgid "Lượt xem"
+#: .\app_account\models.py:30 .\app_account\models.py:31
+msgid "API Key"
 msgstr ""
 
-#: .\app_article\models.py:24
-msgid "Lượt thích"
+#: .\app_account\models.py:40
+msgid "Hạn dùng"
 msgstr ""
 
-#: .\app_article\models.py:25
-msgid "Phê duyệt"
-msgstr ""
-
-#: .\app_article\models.py:30 .\app_article\models.py:31
+#: .\app_article\apps.py:8 .\app_article\models.py:31
+#: .\app_article\models.py:32
 msgid "Bài viết"
 msgstr ""
 
-#: .\app_article\models.py:43 .\app_article\models.py:64
-#: .\app_article\models.py:65
+#: .\app_article\models.py:20
+msgid "Tóm tắt"
+msgstr ""
+
+#: .\app_article\models.py:21
+msgid "Nội dung"
+msgstr ""
+
+#: .\app_article\models.py:23 .\app_article\models.py:58
+#: .\app_article\models.py:73 .\app_article\models.py:88
+msgid "Ảnh thu nhỏ"
+msgstr ""
+
+#: .\app_article\models.py:24
+msgid "Lượt xem"
+msgstr ""
+
+#: .\app_article\models.py:25
+msgid "Lượt thích"
+msgstr ""
+
+#: .\app_article\models.py:26
+msgid "Phê duyệt"
+msgstr ""
+
+#: .\app_article\models.py:44 .\app_article\models.py:65
+#: .\app_article\models.py:66
 msgid "Hình ảnh"
 msgstr ""
 
-#: .\app_article\models.py:47 .\app_article\models.py:78
-#: .\app_article\models.py:79
+#: .\app_article\models.py:48 .\app_article\models.py:79
+#: .\app_article\models.py:80
 msgid "Tài liệu"
 msgstr ""
 
-#: .\app_article\models.py:51
+#: .\app_article\models.py:52
 msgid "Đường dẫn ngoài"
 msgstr ""
 
-#: .\app_article\models.py:58
+#: .\app_article\models.py:59
 msgid "Ảnh đầy đủ"
 msgstr ""
 
-#: .\app_article\models.py:70
+#: .\app_article\models.py:71
 msgid "Tệp tài liệu"
 msgstr ""
 
-#: .\app_article\models.py:85
+#: .\app_article\models.py:86
 msgid "Liên kết"
 msgstr ""
 
-#: .\app_article\models.py:93 .\app_article\models.py:94
+#: .\app_article\models.py:94 .\app_article\models.py:95
 msgid "Liên kết ngoài"
 msgstr ""
 
 #: .\app_gateway\admin.py:13
 msgid "Đối tượng"
+msgstr ""
+
+#: .\backend\custom\models.py:33
+msgid "ID"
 msgstr ""
 
 #: .\backend\custom\models.py:34
@@ -115,8 +145,8 @@ msgid "Ngày xóa"
 msgstr ""
 
 #: .\backend\custom\models.py:70
-msgid "Deleted By"
-msgstr "Người xóa"
+msgid "Nguời xóa"
+msgstr ""
 
 #: .\backend\custom\models.py:72
 msgid "Hoạt động"
@@ -126,25 +156,77 @@ msgstr ""
 msgid "Slug"
 msgstr ""
 
-#: .\backend\settings.py:180
+#: .\backend\settings.py:194
 msgid "Django core Admin"
 msgstr ""
 
-#: .\backend\settings.py:183 .\backend\settings.py:186
+#: .\backend\settings.py:197 .\backend\settings.py:200
 msgid "Django core"
 msgstr ""
 
-#: .\backend\settings.py:224
+#: .\backend\settings.py:233
 msgid "Trang chủ"
 msgstr ""
 
-#: .\backend\settings.py:389
+#: .\backend\settings.py:353
 msgid "Tiếng Việt"
 msgstr ""
 
-#: .\backend\settings.py:390
+#: .\backend\settings.py:354
 msgid "English"
 msgstr "Tiếng Anh"
+
+#: .\backend\settings.py:355
+msgid "中国"
+msgstr ""
+
+#: .\templates\admin\base.html:96
+msgid "Search"
+msgstr ""
+
+#: .\templates\admin\base.html:157
+msgid "Account"
+msgstr ""
+
+#: .\templates\admin\base.html:160
+msgid "Change password"
+msgstr ""
+
+#: .\templates\admin\base.html:165
+msgid "Log out"
+msgstr ""
+
+#: .\templates\admin\base.html:176
+msgid "See Profile"
+msgstr ""
+
+#: .\templates\admin\base.html:216
+msgid "Dashboard"
+msgstr ""
+
+#: .\templates\admin\base.html:328
+msgid "Jazzmin version"
+msgstr ""
+
+#: .\templates\admin\base.html:331
+msgid "Copyright"
+msgstr ""
+
+#: .\templates\admin\base.html:331
+msgid "All rights reserved."
+msgstr ""
+
+#: .\templates\admin\base.html:347
+msgid "UI Configuration"
+msgstr ""
+
+#: .\templates\admin\base.html:351
+msgid "Copy this info your settings file to persist these UI changes"
+msgstr ""
+
+#: .\templates\admin\base.html:355
+msgid "Close"
+msgstr ""
 
 #: .\templates\admin\change_form.html:23
 msgid "Home"
@@ -177,3 +259,6 @@ msgstr "Xem trang"
 #: .\templates\admin\edit_inline\tabular.html:19
 msgid "Delete?"
 msgstr "Xóa?"
+
+#~ msgid "Deleted By"
+#~ msgstr "Người xóa"

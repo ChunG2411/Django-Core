@@ -43,11 +43,12 @@ schema_view = get_schema_view(
 
 urlpatterns = i18n_patterns(
     path('', RedirectView.as_view(url="admin/", permanent=False), name="admin"),
-    path('api/', include('app_gateway.urls')),
     path('admin/', admin.site.urls),
 )
 
 urlpatterns += [
+    path('api/', include('app_gateway.urls')),
+
     path('rosetta/', include('rosetta.urls')),
     path("i18n/", include("django.conf.urls.i18n")),
     path('summernote/', include('django_summernote.urls')),
