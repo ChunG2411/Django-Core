@@ -5,10 +5,12 @@ from django.utils.translation import gettext_lazy as _
 from parler.admin import TranslatableAdmin, TranslatableTabularInline
 from django_summernote.admin import SummernoteModelAdmin
 from import_export.admin import ImportExportModelAdmin
+from django.contrib.auth.admin import UserAdmin
 
-from .models import APIKey
+from .models import APIKey, User
 from .forms import APIKeyForm
-from backend.custom.admin import BaseAdmin, BaseTranslatableAdmin, BaseTabularInlineAdmin, BaseStackedInlineAdmin
+from .resources import UserResource
+from backend.custom.admin import BaseAdmin, BaseTranslatableAdmin, BaseAdminFunction, BaseImportExportAdmin
 
 
 # Register your models here.
@@ -27,4 +29,70 @@ class APIKeyAdmin(BaseTranslatableAdmin):
     form = APIKeyForm
 
 
+class CustomUserAdmin(BaseAdminFunction, UserAdmin, BaseImportExportAdmin):
+    list_display = ["username", "email", "first_name", "last_name", "is_active", "is_staff", "is_superuser"]
+    fieldsets = (
+        (None,
+            {"fields": (
+                "username",
+                "password",
+                "email"
+            )}
+        ),
+        (_("Personal info"),
+            {"fields": (
+                "first_name",
+                "last_name",
+                "phone",
+                "gender",
+                "birth",
+                "address",
+                "avatar_preveiw",
+                "avatar",
+                "bio",
+                "public"
+            )}
+        ),
+        (_("Permissions"),
+            {"fields": (
+                "is_active",
+                "is_staff",
+                "is_superuser",
+                "groups",
+                "user_permissions",
+            )}
+        ),
+        (_("Important dates"),
+            {"fields": (
+                "last_login",
+                "date_joined",
+                "created_at",
+                "updated_at"
+            )}
+        )
+    )
+    add_fieldsets = (
+        (None,
+            {
+                "classes": ("wide",),
+                "fields": ("username", "first_name", "last_name", "email", "usable_password", "password1", "password2"),
+            },
+        ),
+    )
+    readonly_fields = ["avatar_preveiw", "date_joined", "last_login", "created_at", "updated_at"]
+
+    resource_classes = [UserResource]
+
+    def has_import_permission(self, request):
+        return False
+
+    @admin.display(description='')
+    def avatar_preveiw(self, obj):
+        if obj.avatar:
+            return mark_safe(f"<a href='{settings.API_URL + obj.avatar.url}' target='_blank'><img src={obj.avatar.url} style='width:100px;height:100px;object-fit:contain'/></a>")
+        else:
+            return ""
+
+
 admin.site.register(APIKey, APIKeyAdmin)
+admin.site.register(User, CustomUserAdmin)

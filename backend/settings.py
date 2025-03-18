@@ -255,6 +255,7 @@ JAZZMIN_SETTINGS = {
         "admin.LogEntry": "fas fa-history",
         "app_article.Article": "fas fa-newspaper",
         "app_account.APIKey": "fas fa-key",
+        "app_account.User": "fas fa-user",
     },
     # Icons that are used when one is not manually specified
     # "default_icon_parents": "fas fa-chevron-circle-right",
@@ -440,3 +441,4 @@ API_URL = os.getenv("API_URL")
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'app_account.User'
