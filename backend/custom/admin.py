@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.utils import timezone
 from parler.admin import TranslatableAdmin, TranslatableTabularInline
+from import_export.admin import ImportExportModelAdmin
+from django.utils.timezone import datetime
 
 
 class BaseAdmin(admin.ModelAdmin):
@@ -135,3 +137,8 @@ class BaseTabularInlineAdmin(admin.TabularInline, TranslatableTabularInline):
                 obj.deleted_by = request.user
                 obj.deleted_at = timezone.now()
                 obj.save()
+
+
+class BaseImportExportAdmin(ImportExportModelAdmin):
+    def get_export_filename(self, request, queryset, file_format):
+        return f"{self.model.__name__}-{datetime.now().strftime('%Y-%m-%d')}-{request.LANGUAGE_CODE}.{file_format.get_extension()}"

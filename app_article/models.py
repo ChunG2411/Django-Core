@@ -6,7 +6,7 @@ from django_resized import ResizedImageField
 from django.conf import settings
 
 from backend.custom.models import BaseModel, BaseTranslatableModel
-from backend.custom.functions import upload_to, validate_video_extension, validate_audio_extension, validate_document_extension, create_slug
+from backend.custom.functions import upload_to, validate_document_extension, create_slug
 
 
 # Create your models here.
