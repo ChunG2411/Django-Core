@@ -49,6 +49,7 @@ urlpatterns = i18n_patterns(
 urlpatterns += [
     path('api/', include('app_gateway.urls')),
 
+    path("o/", include('oauth2_provider.urls')),
     path('rosetta/', include('rosetta.urls')),
     path("i18n/", include("django.conf.urls.i18n")),
     path('summernote/', include('django_summernote.urls')),

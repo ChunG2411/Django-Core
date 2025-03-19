@@ -1,10 +1,19 @@
 from rest_framework.views import APIView, Response
 from rest_framework.viewsets import ViewSet, ModelViewSet
-from rest_framework.decorators import action
+from rest_framework.decorators import action, permission_classes
 from rest_framework import permissions
 from django.contrib.auth.models import Group, Permission
 from django.contrib.auth import authenticate
 from django.db.models import Q
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from django.views import View
+from django.http import HttpResponse, JsonResponse
+from oauth2_provider.views.mixins import OAuthLibMixin
+from oauth2_provider.models import AccessToken, RefreshToken
+from dotenv import load_dotenv
+import os, json
+from django.utils import timezone
 
 from .models import (
                         APIKey,
@@ -26,7 +35,80 @@ from backend.custom.task import send_email_task
 # Create your views here.
 
 app_label = __name__.split('.')[0]
+load_dotenv()
 
+
+@method_decorator(csrf_exempt, name="dispatch")
+class TokenView(OAuthLibMixin, View):
+    # @staticmethod
+    # def save_log_authen(request, user):
+    #     ip_address = get_ip_address(request)
+    #     platform = request.META.get('HTTP_SEC_CH_UA_PLATFORM')
+    #     info_machine = request.META.get('HTTP_USER_AGENT')
+    #     LogAuthen.objects.create(user=user, ip_address=ip_address, platform=platform, info_machine=info_machine,
+    #                              action = 'Login')
+
+    def post(self, request, *args, **kwargs):
+        username_email = request.POST.get('username_email')
+        password = request.POST.get('password')
+        user = None
+        try:
+            if '@' in username_email:
+                username = User.objects.get(email=username_email).username
+                user = authenticate(username=username, password=password)
+            else:
+                user = authenticate(username=username_email, password=password)
+            if not user:
+                return HttpResponse("Tên đăng nhập hoặc mật khẩu không đúng", status=400)
+        except:
+            return HttpResponse("Tên đăng nhập hoặc Email không tồn tại", status=400)
+        
+        post = request.POST.copy()
+        post['username'] = user.username
+        post['client_id'] = os.getenv('CLIENT_ID')
+        post['client_secret'] = os.getenv('CLIENT_SECRET')
+        post['grant_type'] = 'password'
+        request.POST = post
+
+        _, _, body, status = self.create_token_response(request)
+        body = json.loads(body)
+        if status == 200:
+            # self.save_log_authen(request, user)
+            user.last_login = timezone.now()
+            user.save()
+        return JsonResponse(data=body, status=status)
+
+
+@permission_classes([permissions.IsAuthenticated])
+class LogoutView(APIView):
+    # @staticmethod
+    # def save_log_authen(request, action):
+    #     ip_address = get_ip_address(request)
+    #     platform = request.META.get('HTTP_SEC_CH_UA_PLATFORM')
+    #     info_machine = request.META.get('HTTP_USER_AGENT')
+    #     LogAuthen.objects.create(user=request.user, ip_address=ip_address, platform=platform, info_machine=info_machine,
+    #                              action = action)
+        
+    def post(self, request):
+        all = request.data.get('all')
+        try:
+            if all:
+                access_token = AccessToken.objects.filter(user=request.user)
+                refresh_token = RefreshToken.objects.filter(user=request.user)
+                access_token.delete()
+                refresh_token.delete()
+                # self.save_log_authen(request, 'Logout all')
+                return Response("Đã đăng xuất khỏi tất cả thiết bị", status=200)
+            else:
+                access_token = AccessToken.objects.get(token=request.auth)
+                refresh_token = RefreshToken.objects.get(access_token=access_token)
+                access_token.delete()
+                refresh_token.delete()
+                # self.save_log_authen(request, 'Logout')
+                return Response("Đã đăng xuất", status=200)
+        except:
+            return Response("Có lỗi xảy ra trong quá trình thực hiện", status=400)
+        
 
 class APIKeyView(ModelViewSet,
                   HandleDestroy,
