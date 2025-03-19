@@ -103,3 +103,18 @@ class User(
         empty_values_percent = (empty_values_count / count_fields) * 100
         completed_fields_percent = 100 - round(empty_values_percent)
         return completed_fields_percent
+
+
+class VerifyEmail(
+                  BaseIDModel,
+                  BaseCreateModel,
+                  BaseUpdateModel  
+                ):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="verifyemail_user")
+    code = models.CharField(max_length=6)
+
+    class Meta:
+        db_table = f'tb_{app_label}_verify_mail'
+        verbose_name = _('Mã email')
+        verbose_name_plural = _('Mã email')
+        

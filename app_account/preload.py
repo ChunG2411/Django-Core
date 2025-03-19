@@ -34,3 +34,17 @@ User_preload = {
     'filter': [
     ]
 }
+
+Group_preload = {
+    'fields' : [
+        'id',
+        'name'
+    ],
+    'translations_fields': [
+    ],
+    'search': [
+        'name'
+    ],
+    'filter': [
+    ]
+}

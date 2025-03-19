@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'import_export',
     'daphne',
+    'django_celery_results',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -241,7 +242,7 @@ JAZZMIN_SETTINGS = {
     # Whether to aut expand the menu
     "navigation_expanded": True,
 
-    'hide_apps': ["django_summernote"],
+    'hide_apps': ["django_summernote", "django_celery_results"],
 
     "hide_models": [],
 
@@ -415,6 +416,22 @@ SUMMERNOTE_CONFIG = {
 DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': lambda request: os.getenv("SHOW_DEBUG_TOOLBAR") == 'True'
 }
+
+
+# Celery
+
+CELERY_BROKER_URL = "redis://127.0.0.1:6379"
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379"
+
+
+# Email config
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 
 # Django-import-export

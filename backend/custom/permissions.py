@@ -1,5 +1,5 @@
 from rest_framework.permissions import BasePermission
-# from app_account.models import APIKey
+from app_account.models import APIKey
 
 
 class IsOwnerPermission(BasePermission):
@@ -12,21 +12,24 @@ class CustomModelPermissions(BasePermission):
         app_name = view.queryset.model._meta.app_label
         model_name = view.queryset.model._meta.model_name
 
-        # apikey = request.query_params.get('apikey')
-        # if apikey:
-        #     key = APIKey.objects.get(key=apikey)
-        #     if not key.is_active:
-        #         return False
-        #     if request.method == 'GET':
-        #         return True if f'view_{model_name}' in [i.codename for i in key.permissions.all()] else False
-        #     elif request.method == 'POST':
-        #         return True if f'add_{model_name}' in [i.codename for i in key.permissions.all()] else False
-        #     elif request.method == 'PATCH' or request.method == 'PUT':
-        #         return True if f'change_{model_name}' in [i.codename for i in key.permissions.all()] else False
-        #     elif request.method == 'DELETE':
-        #         return True if f'delete_{model_name}' in [i.codename for i in key.permissions.all()] else False
-        #     else:
-        #         return False
+        apikey = request.query_params.get('apikey')
+        if apikey:
+            try:
+                key = APIKey.objects.get(id=apikey)
+                if not key.is_active:
+                    return False
+                if request.method == 'GET':
+                    return True if f'view_{model_name}' in [i.codename for i in key.permissions.all()] else False
+                elif request.method == 'POST':
+                    return True if f'add_{model_name}' in [i.codename for i in key.permissions.all()] else False
+                elif request.method == 'PATCH' or request.method == 'PUT':
+                    return True if f'change_{model_name}' in [i.codename for i in key.permissions.all()] else False
+                elif request.method == 'DELETE':
+                    return True if f'delete_{model_name}' in [i.codename for i in key.permissions.all()] else False
+                else:
+                    return False
+            except:
+                pass
 
         if request.method == 'GET':
             # return request.user.has_perm(f'{app_name}.view_{model_name}') or request.user.is_superuser

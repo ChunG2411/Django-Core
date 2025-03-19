@@ -7,7 +7,7 @@ from django_summernote.admin import SummernoteModelAdmin
 from import_export.admin import ImportExportModelAdmin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import APIKey, User
+from .models import APIKey, User, VerifyEmail
 from .forms import APIKeyForm
 from .resources import UserResource
 from backend.custom.admin import BaseAdmin, BaseTranslatableAdmin, BaseAdminFunction, BaseImportExportAdmin
@@ -30,20 +30,23 @@ class APIKeyAdmin(BaseTranslatableAdmin):
 
 
 class CustomUserAdmin(BaseAdminFunction, UserAdmin, BaseImportExportAdmin):
-    list_display = ["username", "email", "first_name", "last_name", "is_active", "is_staff", "is_superuser"]
+    list_display = ["username", "email", "email_verified", "phone_verified", "is_active", "is_staff", "is_superuser"]
+    list_display_links = ["username", "email"]
     fieldsets = (
         (None,
             {"fields": (
                 "username",
                 "password",
-                "email"
+                "email",
+                "email_verified",
+                "phone",
+                "phone_verified"
             )}
         ),
         (_("Personal info"),
             {"fields": (
                 "first_name",
                 "last_name",
-                "phone",
                 "gender",
                 "birth",
                 "address",
@@ -94,5 +97,17 @@ class CustomUserAdmin(BaseAdminFunction, UserAdmin, BaseImportExportAdmin):
             return ""
 
 
+class VerifyEmailAdmin(admin.ModelAdmin):
+    fields = ['id', 'user', 'code', 'created_at', 'created_by', 'updated_at', 'updated_by']
+    readonly_fields = ['id', 'created_at', 'created_by', 'updated_at', 'updated_by']
+    search_fields = ["name__icontains"]
+
+    list_display = ["id", "user", "code"]
+    list_display_links = ["id", "user", "code"]
+    list_per_page = 10
+
+
+
 admin.site.register(APIKey, APIKeyAdmin)
 admin.site.register(User, CustomUserAdmin)
+admin.site.register(VerifyEmail, VerifyEmailAdmin)

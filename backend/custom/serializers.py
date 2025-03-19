@@ -2,15 +2,8 @@ from rest_framework import serializers
 from parler_rest.serializers import TranslatableModelSerializer
 
 
-class BaseSerializer(serializers.ModelSerializer):
-    base_fields = [
-                    "id", "order", "slug",
-                   "is_active",
-                   "created_at", "created_by",
-                   "updated_at", "updated_by"
-                ]
-    base_overview_fields = ["id", "order", "slug", "is_active"]
 
+class BaseRepSerializer(serializers.ModelSerializer):
     class Meta:
         abstract = True
     
@@ -28,15 +21,7 @@ class BaseSerializer(serializers.ModelSerializer):
         return data
 
 
-class BaseTranslatableSerializer(TranslatableModelSerializer):
-    base_fields = [
-                    "id", "order", "slug",
-                   "is_active",
-                   "created_at", "created_by",
-                   "updated_at", "updated_by"
-                ]
-    base_overview_fields = ["id", "order", "slug", "is_active"]
-
+class BaseRepTranslatableSerializer(serializers.ModelSerializer):
     class Meta:
         abstract = True
     
@@ -59,3 +44,29 @@ class BaseTranslatableSerializer(TranslatableModelSerializer):
                     del data[i]
 
         return data
+
+
+class BaseSerializer(BaseRepSerializer):
+    base_fields = [
+                    "id", "order", "slug",
+                   "is_active",
+                   "created_at", "created_by",
+                   "updated_at", "updated_by"
+                ]
+    base_overview_fields = ["id", "order", "slug", "is_active"]
+
+    class Meta:
+        abstract = True
+    
+
+class BaseTranslatableSerializer(BaseRepTranslatableSerializer, TranslatableModelSerializer):
+    base_fields = [
+                    "id", "order", "slug",
+                   "is_active",
+                   "created_at", "created_by",
+                   "updated_at", "updated_by"
+                ]
+    base_overview_fields = ["id", "order", "slug", "is_active"]
+
+    class Meta:
+        abstract = True

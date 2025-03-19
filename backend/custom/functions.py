@@ -1,8 +1,9 @@
 from django.conf import settings
-import os, datetime, uuid
+import os, datetime, uuid, re, random
 from django.core.exceptions import ValidationError
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
+
 
 
 def get_ip_address(request):
@@ -30,6 +31,54 @@ def upload_to(instance, filename):
 def summernote_upload_to():
     result = os.path.join("summernote", datetime.datetime.today().strftime("%Y/%m/%d"))
     return result
+
+
+def get_random_password():
+    password = ''
+    for i in range(6):
+        if i == 0:
+            password += chr(random.randint(65, 90))
+        elif i == 5:
+            password += chr(random.randint(48, 57))
+        else:
+            password += chr(random.randint(97, 122))
+    return password
+
+
+def get_random_verify():
+    code_char = ''
+    for _ in range(5):
+        code_asscii = random.choice([random.randint(48,57),random.randint(65,90),random.randint(97,122)])
+        code_char += chr(code_asscii)
+    return code_char
+
+
+def check_validate_password(password):
+    status = True
+    msg = ''
+    if len(password) < 6:
+        status = False
+        msg = 'Mật khẩu tối thiểu phải có 6 ký tự'
+    password_split = [*password]
+    if ord(password_split[0]) not in range(65, 90):
+        status = False
+        msg = 'Mật khẩu cần viết hoa ký tự đầu'
+    check_have_number = False
+    for i in password_split:
+        if ord(i) in range(48, 57):
+            check_have_number = True
+            break
+    if not check_have_number:
+        status = False
+        msg = 'Mật khẩu phải chứa số'
+    return status, msg
+
+
+def check_validate_phone(phone):
+    regex_phone = r"^(0|\+84)(\s|\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\d)(\s|\.)?(\d{3})(\s|\.)?(\d{3})$"
+    if not re.fullmatch(re.compile(regex_phone), phone):
+        return False
+    return True
 
 
 def validate_audio_extension(value):
